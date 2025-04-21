@@ -1,53 +1,38 @@
 /* styles.css */
-/* ===== BASE RESET ===== */
-@import 'modern-normalize/modern-normalize.css';
+/* Modern normalize reset */
+@import url('https://cdn.jsdelivr.net/npm/modern-normalize@2.0.0/modern-normalize.min.css');
 
+/* Base styles */
 :root {
   --primary-brand: #4d5ae5;
   --pressed-state: #404bbf;
   --dark: #2e2f42;
+  --success: #31d0aa;
   --text: #434455;
-  --light: #f4f4fd;
-  --white: #ffffff;
+  --subtle-text: #8e8f99;
   --accent: #e7e9fc;
+  --light: #f4f4fd;
+  --white-background: #ffffff;
+  --modal-background: #fcfcfc;
 }
 
-/* ===== GLOBAL RESET (B1) ===== */
 body {
   font-family: 'Roboto', sans-serif;
   color: var(--text);
-  background-color: var(--white);
+  background-color: var(--white-background);
+  line-height: 1.5;
+  letter-spacing: 0.02em;
 }
 
-h1,
-h2,
-h3,
-h4,
-h5,
-h6,
-p {
-  margin: 0;
+/* Utility classes */
+.container {
+  width: 1158px;
+  margin: 0 auto;
+  padding: 0 15px;
 }
 
-ul {
-  margin: 0;
-  padding: 0;
-  list-style: none;
-}
-
-img {
-  display: block;
-  max-width: 100%;
-  height: auto;
-}
-
-.link {
-  text-decoration: none;
-  color: currentColor;
-}
-
-.list {
-  list-style: none;
+.section {
+  padding: 120px 0;
 }
 
 .visually-hidden {
@@ -63,21 +48,22 @@ img {
   overflow: hidden;
 }
 
-/* ===== CONTAINER (B7-B9) ===== */
-.container {
-  width: 1158px;
-  margin: 0 auto;
-  padding: 0 15px;
+.list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
 }
 
-/* ===== SECTION (B15) ===== */
-.section {
-  padding: 120px 0;
+.link {
+  text-decoration: none;
 }
 
-/* ===== HEADER (B13) ===== */
+/* Header styles */
 .header {
   border-bottom: 1px solid var(--accent);
+  box-shadow: 0px 2px 1px rgba(46, 47, 66, 0.08),
+    0px 1px 1px rgba(46, 47, 66, 0.16),
+    0px 1px 6px rgba(46, 47, 66, 0.08);
 }
 
 .header-container {
@@ -98,13 +84,39 @@ img {
 }
 
 .nav-link {
+  color: var(--dark);
   font-weight: 500;
   font-size: 16px;
   line-height: 1.5;
   letter-spacing: 0.02em;
-  color: var(--dark);
   padding: 24px 0;
   display: block;
+  position: relative;
+  transition: color 250ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.nav-link:hover,
+.nav-link:focus {
+  color: var(--pressed-state);
+}
+
+.nav-link.active {
+  color: var(--pressed-state);
+}
+
+.nav-link.active::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: -1px;
+  width: 100%;
+  height: 4px;
+  background-color: var(--pressed-state);
+  border-radius: 2px;
+}
+
+.address {
+  font-style: normal;
 }
 
 .address-list {
@@ -113,79 +125,136 @@ img {
 }
 
 .address-link {
-  font-size: 16px;
-  line-height: 1.5;
-  letter-spacing: 0.02em;
   color: var(--text);
-  font-style: normal;
+  transition: color 250ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-/* ===== HERO ===== */
+.address-link:hover,
+.address-link:focus {
+  color: var(--pressed-state);
+}
+
+.address-icon {
+  margin-right: 8px;
+  fill: currentColor;
+}
+
+/* Logo styles */
+.logo {
+  font-family: 'Raleway', sans-serif;
+  font-weight: 800;
+  font-size: 18px;
+  line-height: 1.17;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  color: var(--primary-brand);
+}
+
+.logo-dark {
+  color: var(--dark);
+}
+
+.logo-light {
+  color: var(--light);
+}
+
+/* Hero section */
 .hero {
   background-color: var(--dark);
+  background-image: linear-gradient(
+      rgba(46, 47, 66, 0.7),
+      rgba(46, 47, 66, 0.7)
+    ),
+    url('../images/hero-bg.jpg');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  max-width: 1440px;
+  margin: 0 auto;
   padding: 188px 0;
   text-align: center;
 }
 
 .hero-title {
+  color: var(--white-background);
   font-size: 56px;
   line-height: 1.07;
   letter-spacing: 0.02em;
-  color: var(--white);
   max-width: 496px;
   margin: 0 auto 48px;
 }
 
 .hero-btn {
+  background-color: var(--primary-brand);
+  color: var(--white-background);
   font-family: inherit;
   font-weight: 500;
   font-size: 16px;
   line-height: 1.5;
   letter-spacing: 0.04em;
-  color: var(--white);
-  background-color: var(--primary-brand);
   cursor: pointer;
-  border: none;
-  border-radius: 4px;
   padding: 16px 32px;
-  display: block;
-  margin: 0 auto;
+  border-radius: 4px;
+  border: none;
   min-width: 169px;
+  height: 56px;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.15);
+  transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-/* ===== FEATURES (B10) ===== */
+.hero-btn:hover,
+.hero-btn:focus {
+  background-color: var(--pressed-state);
+}
+
+/* Features section */
 .features-list {
   display: flex;
   gap: 24px;
 }
 
 .features-item {
-  width: calc((100% - 72px) / 4);
+  flex-basis: calc((100% - 72px) / 4);
+}
+
+.features-icon-box {
+  background-color: var(--light);
+  border-radius: 4px;
+  width: 264px;
+  height: 112px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 8px;
+}
+
+.features-icon {
+  fill: var(--dark);
 }
 
 .features-title {
+  color: var(--dark);
   font-weight: 500;
   font-size: 20px;
   line-height: 1.2;
   letter-spacing: 0.02em;
-  color: var(--dark);
   margin-bottom: 8px;
 }
 
 .features-text {
+  color: var(--text);
   font-size: 16px;
   line-height: 1.5;
-  letter-spacing: 0.02em;
 }
 
-/* ===== WORK ===== */
+/* What we do section */
 .section-title {
+  color: var(--dark);
   font-size: 36px;
   line-height: 1.11;
   text-align: center;
   letter-spacing: 0.02em;
   text-transform: capitalize;
-  color: var(--dark);
   margin-bottom: 72px;
 }
 
@@ -195,10 +264,10 @@ img {
 }
 
 .work-item {
-  width: calc((100% - 48px) / 3);
+  flex-basis: calc((100% - 48px) / 3);
 }
 
-/* ===== TEAM (B10, B12) ===== */
+/* Team section */
 .team-section {
   background-color: var(--light);
 }
@@ -209,59 +278,109 @@ img {
 }
 
 .team-item {
-  width: calc((100% - 72px) / 4);
-  background: var(--white);
-  border-radius: 0 0 4px 4px;
-  box-shadow: 0px 1px 6px rgba(46, 47, 66, 0.08);
+  background-color: var(--white-background);
+  flex-basis: calc((100% - 72px) / 4);
+  border-radius: 0px 0px 4px 4px;
+  box-shadow: 0px 1px 6px rgba(46, 47, 66, 0.08),
+    0px 1px 1px rgba(46, 47, 66, 0.16),
+    0px 2px 1px rgba(46, 47, 66, 0.08);
 }
 
 .team-card {
   padding: 32px 16px;
+  text-align: center;
 }
 
 .team-name {
+  color: var(--dark);
   font-weight: 500;
   font-size: 20px;
   line-height: 1.2;
   letter-spacing: 0.02em;
-  color: var(--dark);
-  text-align: center;
   margin-bottom: 8px;
 }
 
 .team-position {
+  color: var(--text);
   font-size: 16px;
-  line-height: 1.5;
-  letter-spacing: 0.02em;
-  text-align: center;
+  margin-bottom: 8px;
 }
 
-/* ===== FOOTER ===== */
+.social-list {
+  display: flex;
+  justify-content: center;
+  gap: 24px;
+}
+
+.social-item {
+  width: 40px;
+  height: 40px;
+}
+
+.social-link {
+  width: 100%;
+  height: 100%;
+  background-color: var(--primary-brand);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.social-link:hover,
+.social-link:focus {
+  background-color: var(--pressed-state);
+}
+
+.social-icon {
+  fill: var(--light);
+}
+
+/* Footer styles */
 .footer {
   background-color: var(--dark);
   padding: 100px 0;
 }
 
-.footer .logo {
-  display: inline-block;
-  margin-bottom: 16px;
+.footer-container {
+  display: flex;
+  align-items: baseline;
+}
+
+.footer-info {
+  margin-right: 120px;
 }
 
 .footer-text {
+  color: var(--light);
+  max-width: 264px;
+  margin-top: 16px;
+}
+
+.footer-social-title {
+  color: var(--white-background);
+  font-weight: 500;
   font-size: 16px;
   line-height: 1.5;
   letter-spacing: 0.02em;
-  color: var(--light);
-  max-width: 264px;
+  margin-bottom: 16px;
 }
 
-/* ===== LOGO ===== */
-.logo {
-  font-family: 'Raleway', sans-serif;
-  font-weight: 800;
-  font-size: 18px;
-  line-height: 1.17;
-  letter-spacing: 0.03em;
-  text-transform: uppercase;
-  color: var(--primary-brand);
+.footer .social-list {
+  gap: 16px;
+}
+
+.footer .social-link:hover,
+.footer .social-link:focus {
+  background-color: var(--success);
+}
+
+/* Hover and focus effects */
+button,
+a {
+  transition: color 250ms cubic-bezier(0.4, 0, 0.2, 1),
+    background-color 250ms cubic-bezier(0.4, 0, 0.2, 1),
+    border-color 250ms cubic-bezier(0.4, 0, 0.2, 1),
+    box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1);
 }
